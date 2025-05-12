@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section
       className="relative bg-cover bg-center h-screen"
-      style={{ backgroundImage: "url('/soldakiadam.png')" }}
+      style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
     >
       {/* Koyu overlay */}
       <div className="absolute inset-0 bg-black/50" />
@@ -35,7 +35,7 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="px-6 py-3 bg-white text-primary rounded-2xl shadow-lg hover:bg-gray-100 transition"
           >
-            WhatsApp&apos;ta Yaz
+            {"WhatsApp'ta Yaz"}
           </a>
         </div>
       </div>
