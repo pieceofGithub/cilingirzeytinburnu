@@ -1,15 +1,28 @@
-// components/Contact.tsx
+"use client";
+import React from "react";
+import { motion } from "framer-motion";
+import { fadeInUp } from "@/lib/motionVariants";
+
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 px-4 bg-white">
+    <motion.section
+      id="contact"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={fadeInUp}
+      className="py-20 px-4 bg-white"
+    >
       <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
         İletişim
       </h2>
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Başvuru Formu */}
-        <form
-          action="https://formspree.io/f/yourFormId" // formspree.io ID'nizi buraya ekleyin
+      <motion.div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <motion.form
+          action="https://formspree.io/f/yourFormId"
           method="POST"
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
           className="space-y-4"
         >
           <input
@@ -17,32 +30,36 @@ export default function Contact() {
             name="name"
             placeholder="Adınız"
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary"
           />
           <input
             type="tel"
             name="phone"
             placeholder="Telefon Numaranız"
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary"
           />
           <textarea
             name="message"
             placeholder="Mesajınız"
             rows={5}
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary"
           />
           <button
             type="submit"
-            className="w-full py-3 bg-primary text-white rounded-2xl shadow hover:bg-secondary transition"
+            className="w-full py-3 bg-primary text-white rounded-2xl hover:bg-secondary transition"
           >
             Gönder
           </button>
-        </form>
+        </motion.form>
 
-        {/* İletişim Bilgileri */}
-        <div className="space-y-6 text-gray-700">
+        <motion.div
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="space-y-6 text-gray-700"
+        >
           <p>
             <strong>Telefon:</strong>{" "}
             <a
@@ -75,17 +92,8 @@ export default function Contact() {
           <p>
             <strong>Adres:</strong> Zeytinburnu, İstanbul
           </p>
-          <div className="flex space-x-4 mt-4">
-            {/* Sosyal ikonlar örneği */}
-            <a href="#" aria-label="Facebook" className="hover:text-primary">
-              {/* Facebook SVG ikonu */}
-            </a>
-            <a href="#" aria-label="Instagram" className="hover:text-primary">
-              {/* Instagram SVG ikonu */}
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 }

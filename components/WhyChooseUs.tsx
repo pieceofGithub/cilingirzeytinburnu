@@ -1,14 +1,11 @@
-// components/WhyChooseUs.tsx
+"use client";
+import React from "react";
+import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { fadeInUp, scaleOnHover } from "@/lib/motionVariants";
 import { Award, ShieldCheck, Clock, CheckCircle } from "lucide-react";
 
-interface Feature {
-  title: string;
-  description: string;
-  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-}
-
-const features: Feature[] = [
+const features = [
   {
     title: "20+ Yıllık Deneyim",
     description:
@@ -24,39 +21,49 @@ const features: Feature[] = [
   {
     title: "Acil Müdahale Süresi: 15 dk",
     description:
-      "Arıza bildiriminden sonraki ortalama 15 dakikada yerinizdeyiz.",
+      "Arıza bildiriminizin alınmasından sonraki ortalama 15 dakikada yerinizdeyiz.",
     Icon: Clock,
   },
   {
     title: "Garanti & Sigorta",
-    description:
-      "Yaptığımız tüm işler için 6 aya kadar işçilik garantisi ve sigorta.",
+    description: "Tüm işler için 6 aya kadar işçilik garantisi ve sigorta.",
     Icon: CheckCircle,
   },
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section id="why-choose-us" className="py-20 px-4 bg-white">
+    <motion.section
+      id="why-choose-us"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={fadeInUp}
+      className="py-20 px-4 bg-white"
+    >
       <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
         Neden Bizi Seçmelisiniz?
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {features.map(({ title, description, Icon }) => (
-          <Card
+          <motion.div
             key={title}
-            className="text-center hover:shadow-lg transition-shadow"
+            variants={scaleOnHover}
+            whileHover="hover"
+            className="transition"
           >
-            <CardHeader className="pt-6">
-              <Icon className="mx-auto w-8 h-8 text-primary mb-4" />
-              <CardTitle className="text-lg">{title}</CardTitle>
-            </CardHeader>
-            <CardContent className="px-4 pb-6">
-              <p className="text-sm text-gray-600">{description}</p>
-            </CardContent>
-          </Card>
+            <Card className="text-center hover:shadow-lg transition-shadow">
+              <CardHeader className="pt-6">
+                <Icon className="mx-auto w-8 h-8 text-primary mb-4" />
+                <CardTitle className="text-lg">{title}</CardTitle>
+              </CardHeader>
+              <CardContent className="px-4 pb-6">
+                <p className="text-sm text-gray-600">{description}</p>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }

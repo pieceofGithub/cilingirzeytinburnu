@@ -1,4 +1,6 @@
-// components/Services.tsx
+"use client";
+import React from "react";
+import { motion } from "framer-motion";
 import {
   Card,
   CardHeader,
@@ -6,15 +8,10 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
+import { fadeInUp, scaleOnHover } from "@/lib/motionVariants";
 import { Home, Truck, Lock, Key } from "lucide-react";
 
-interface Service {
-  title: string;
-  description: string;
-  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-}
-
-const services: Service[] = [
+const services = [
   {
     title: "Ev Çilingir Hizmeti",
     description:
@@ -43,25 +40,39 @@ const services: Service[] = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 px-4 bg-gray-50">
+    <motion.section
+      id="services"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={fadeInUp}
+      className="py-20 px-4 bg-gray-50"
+    >
       <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
         Hizmetlerimiz
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {services.map(({ title, description, Icon }) => (
-          <Card key={title} className="hover:shadow-xl transition">
-            <CardHeader className="flex items-center space-x-3 p-4">
-              <Icon className="w-6 h-6 text-primary" />
-              <CardTitle className="text-lg">{title}</CardTitle>
-            </CardHeader>
-            <CardContent className="px-4 pb-4">
-              <CardDescription className="text-sm text-gray-600">
-                {description}
-              </CardDescription>
-            </CardContent>
-          </Card>
+          <motion.div
+            key={title}
+            variants={scaleOnHover}
+            whileHover="hover"
+            className="transition"
+          >
+            <Card className="hover:shadow-xl">
+              <CardHeader className="flex items-center space-x-3 p-4">
+                <Icon className="w-6 h-6 text-primary" />
+                <CardTitle className="text-lg">{title}</CardTitle>
+              </CardHeader>
+              <CardContent className="px-4 pb-4">
+                <CardDescription className="text-sm text-gray-600">
+                  {description}
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }

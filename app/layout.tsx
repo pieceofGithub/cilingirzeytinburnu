@@ -1,22 +1,26 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import React from "react";
+import Providers from "./providers";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Contractor App",
-  description: "Let's GOOOOOOOOOOOOO",
+export const metadata = {
+  title: "ÇilingirZeytinburnu.com",
+  description: "7/24 Acil Çilingir Hizmeti - Zeytinburnu ve Çevresi",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="tr">
+      <body>
+        {/* 
+          Tüm sayfa içerikleri artık client-only Providers bileşeninde sarılıyor.
+          Böylece server component’te createContext hatası asla çıkmaz.
+        */}
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

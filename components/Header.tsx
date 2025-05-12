@@ -1,8 +1,8 @@
-// components/Header.tsx
 "use client";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { fadeInUp } from "@/lib/motionVariants";
 import { Menu, X, PhoneCall } from "lucide-react";
 
 const navItems = [
@@ -20,17 +20,17 @@ export default function Header() {
   const whatsappLink = `https://wa.me/90${phoneNumber.replace(/^\+/, "")}`;
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+    <motion.header
+      initial="hidden"
+      animate="visible"
+      variants={fadeInUp}
+      className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm"
+    >
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="text-2xl font-bold text-primary hover:opacity-80 transition"
-        >
+        <Link href="/" className="text-2xl font-bold text-primary">
           ÇilingirZeytinburnu
         </Link>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-6">
           {navItems.map(({ label, href }) => (
             <Link
@@ -41,7 +41,6 @@ export default function Header() {
               {label}
             </Link>
           ))}
-          {/* Hemen Ara Butonu */}
           <a
             href={`tel:${phoneNumber}`}
             className="flex items-center space-x-1 px-4 py-2 bg-primary text-white rounded-full hover:bg-secondary transition"
@@ -51,10 +50,9 @@ export default function Header() {
           </a>
         </nav>
 
-        {/* Mobile Menü Butonu */}
         <button
           className="md:hidden p-2 text-gray-700"
-          onClick={() => setMobileOpen((prev) => !prev)}
+          onClick={() => setMobileOpen((p) => !p)}
           aria-label="Toggle menu"
         >
           {mobileOpen ? (
@@ -65,9 +63,13 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Nav */}
       {mobileOpen && (
-        <div className="md:hidden bg-white shadow-inner">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="md:hidden bg-white shadow-inner"
+        >
           <ul className="flex flex-col space-y-2 px-4 pb-4">
             {navItems.map(({ label, href }) => (
               <li key={href}>
@@ -92,8 +94,8 @@ export default function Header() {
               </a>
             </li>
           </ul>
-        </div>
+        </motion.div>
       )}
-    </header>
+    </motion.header>
   );
 }
