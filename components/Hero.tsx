@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section
       className="relative bg-cover bg-center h-screen"
-      style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
+      style={{ backgroundImage: "url('/soldakiadam.png')" }}
     >
       {/* Koyu overlay */}
       <div className="absolute inset-0 bg-black/50" />
