@@ -1,5 +1,7 @@
 // components/Hero.tsx
-const phoneNumber = "+905530481400";
+import React from "react";
+
+const phoneNumber = "+905530481400"; // Gerçek numaranızı buraya yazın
 const whatsappLink = `https://wa.me/90${phoneNumber.replace(/^\+/, "")}`;
 
 export default function Hero() {
@@ -9,7 +11,7 @@ export default function Hero() {
       style={{ backgroundImage: "url('/soldakiadam.png')" }}
     >
       {/* Koyu overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0 bg-black/50" />
 
       {/* İçerik */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
@@ -33,7 +35,7 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="px-6 py-3 bg-white text-primary rounded-2xl shadow-lg hover:bg-gray-100 transition"
           >
-            WhatsApp'ta Yaz
+            WhatsApp&apos;ta Yaz
           </a>
         </div>
       </div>
